@@ -9,9 +9,10 @@
 import UIKit
 
 class BusinessesViewController: UIViewController {
+    private var _tableView: UITableView!
+    private var _searchBar: UISearchBar!
 
     var businesses = [Business]()
-    private var _tableView: UITableView!
 
     
     override func viewDidLoad() {
@@ -24,6 +25,7 @@ class BusinessesViewController: UIViewController {
 
     func addSubviews() {
         view.addSubview(tableView)
+        navigationItem.titleView = searchBar
     }
 
     func addLayouts() {
@@ -36,10 +38,14 @@ class BusinessesViewController: UIViewController {
     }
 
     func initData() {
-        Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
-            self.businesses = businesses
-            self.tableView.reloadData()
+        Business.searchWithTerm("Restaurants", sort: .Distance, categories: nil, deals: nil) { (businesses: [Business]!, error: NSError!) -> Void in
+            self.saveData(businesses)
         }
+    }
+
+    func saveData(businesses: [Business]) {
+        self.businesses = businesses
+        tableView.reloadData()
     }
 }
 
@@ -61,6 +67,25 @@ extension BusinessesViewController: UITableViewDelegate, UITableViewDataSource {
         cell.withBusiness(business)
         return cell
     }
+
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+    }
+}
+
+extension BusinessesViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        let term = searchBar.text ?? ""
+        Business.searchWithTerm(term, sort: .BestMatched, categories: nil, deals: nil) { (businesses, error) -> Void in
+            self.saveData(businesses)
+        }
+    }
+
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
 }
 
 extension BusinessesViewController {
@@ -71,8 +96,20 @@ extension BusinessesViewController {
             v.delegate = self
             v.estimatedRowHeight = 100
             v.rowHeight = UITableViewAutomaticDimension
+            v.tableFooterView = UIView()
             _tableView = v
         }
         return _tableView
+    }
+
+    var searchBar: UISearchBar {
+        if _searchBar == nil {
+            let v = UISearchBar()
+            v.placeholder = "Restaurants"
+            v.showsCancelButton = true
+            v.delegate = self
+            _searchBar = v
+        }
+        return _searchBar
     }
 }

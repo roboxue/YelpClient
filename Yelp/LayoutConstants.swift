@@ -14,3 +14,5 @@ let YPTintColor = UIColor.blueColor()
 let YPSpanSize = 5
 
 let YPPlaceholderImage = UIImage(named: "Placeholder")!
+
+let YPDefaultLimit = 10
