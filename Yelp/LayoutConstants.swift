@@ -11,4 +11,6 @@ import UIKit
 let YPBackgroundColor = UIColor.whiteColor()
 let YPTintColor = UIColor.blueColor()
 
+let YPSpanSize = 5
+
 let YPPlaceholderImage = UIImage(named: "Placeholder")!

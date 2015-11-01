@@ -50,16 +50,15 @@ extension BusinessesViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let reuseId = "business"
-        let cell: UITableViewCell
-        if let reuseCell = tableView.dequeueReusableCellWithIdentifier(reuseId) {
+        let cell: BusinessTableViewCell
+        if let reuseCell = tableView.dequeueReusableCellWithIdentifier(reuseId) as? BusinessTableViewCell {
             cell = reuseCell
         } else {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: reuseId)
+            cell = BusinessTableViewCell(style: .Subtitle, reuseIdentifier: reuseId)
         }
 
         let business = businesses[indexPath.row]
-        cell.textLabel?.text = business.name
-        cell.imageView?.af_setImageWithURL(business.imageURL!, placeholderImage: YPPlaceholderImage)
+        cell.withBusiness(business)
         return cell
     }
 }
@@ -70,6 +69,8 @@ extension BusinessesViewController {
             let v = UITableView()
             v.dataSource = self
             v.delegate = self
+            v.estimatedRowHeight = 100
+            v.rowHeight = UITableViewAutomaticDimension
             _tableView = v
         }
         return _tableView
