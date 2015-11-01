@@ -68,6 +68,10 @@ extension BusinessesViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
     }
