@@ -11,6 +11,7 @@ import UIKit
 class BusinessesViewController: UIViewController {
     private var _tableView: UITableView!
     private var _searchBar: UISearchBar!
+    private var _filterButton: UIBarButtonItem!
 
     var businesses = [Business]()
 
@@ -26,6 +27,7 @@ class BusinessesViewController: UIViewController {
     func addSubviews() {
         view.addSubview(tableView)
         navigationItem.titleView = searchBar
+        navigationItem.leftBarButtonItem = filterButton
     }
 
     func addLayouts() {
@@ -46,6 +48,11 @@ class BusinessesViewController: UIViewController {
     func saveData(businesses: [Business]) {
         self.businesses = businesses
         tableView.reloadData()
+    }
+
+    func didPressedFilterButton() {
+        let filterPage = YPNavigationViewController(rootViewController: FilterViewController())
+        presentViewController(filterPage, animated: true, completion: nil)
     }
 }
 
@@ -115,5 +122,13 @@ extension BusinessesViewController {
             _searchBar = v
         }
         return _searchBar
+    }
+
+    var filterButton: UIBarButtonItem {
+        if _filterButton == nil {
+            let v = UIBarButtonItem(title: "Filter", style: .Plain, target: self, action: "didPressedFilterButton")
+            _filterButton = v
+        }
+        return _filterButton
     }
 }
