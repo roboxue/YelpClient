@@ -20,9 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.backgroundColor = YPBackgroundColor
-        window!.tintColor = YPTintColor
-        window!.rootViewController = UINavigationController(rootViewController: BusinessesViewController())
+        window!.tintColor = YPRed
+        window!.rootViewController = YPNavigationViewController(rootViewController: BusinessesViewController())
         window!.makeKeyAndVisible()
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         return true
     }
 

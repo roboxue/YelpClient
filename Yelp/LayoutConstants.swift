@@ -9,10 +9,11 @@
 import UIKit
 
 let YPBackgroundColor = UIColor.whiteColor()
-let YPTintColor = UIColor.blueColor()
+let YPRed = UIColor(red: 196.0/255.0, green: 18.0/255.0, blue: 0.0, alpha: 1)
 
 let YPSpanSize = 5
 
 let YPPlaceholderImage = UIImage(named: "Placeholder")!
 
 let YPDefaultLimit = 10
+
