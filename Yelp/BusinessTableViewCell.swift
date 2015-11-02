@@ -16,6 +16,7 @@ class BusinessTableViewCell: UITableViewCell {
     private var _businessAddressLabel: UILabel!
     private var _businessCategoryLabel: UILabel!
     private var _businessDistanceLabel: UILabel!
+    private var _businessDealLabel: UILabel!
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -41,6 +42,7 @@ class BusinessTableViewCell: UITableViewCell {
         addSubview(businessAddressLabel)
         addSubview(businessCategoryLabel)
         addSubview(businessDistanceLabel)
+        addSubview(businessDealLabel)
     }
 
     func addLayout() {
@@ -81,6 +83,11 @@ class BusinessTableViewCell: UITableViewCell {
             make.top.equalTo(businessAddressLabel.snp_bottom)
             make.left.equalTo(businessNameLabel)
             make.right.lessThanOrEqualTo(self).offset(-YPSpanSize)
+        }
+        businessDealLabel.snp_makeConstraints { (make) -> Void in
+            make.top.equalTo(businessCategoryLabel.snp_bottom)
+            make.left.equalTo(businessNameLabel)
+            make.right.lessThanOrEqualTo(self).offset(-YPSpanSize)
             make.bottom.lessThanOrEqualTo(self).offset(-YPSpanSize)
         }
     }
@@ -93,6 +100,7 @@ class BusinessTableViewCell: UITableViewCell {
         businessReviewLabel.text = "\(business.reviewCount!) reviews"
         businessAddressLabel.text = business.address
         businessCategoryLabel.text = business.categories
+        businessDealLabel.text = business.dealDescription
     }
 }
 
@@ -163,5 +171,17 @@ extension BusinessTableViewCell {
             _businessDistanceLabel = v
         }
         return _businessDistanceLabel
+    }
+
+    var businessDealLabel: UILabel {
+        if _businessDealLabel == nil {
+            let v = UILabel()
+            v.font = YPContentFontBold
+            v.textColor = YPRed
+            v.numberOfLines = 0
+            v.lineBreakMode = .ByWordWrapping
+            _businessDealLabel = v
+        }
+        return _businessDealLabel
     }
 }

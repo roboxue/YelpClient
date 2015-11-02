@@ -19,6 +19,7 @@ class Business: NSObject, MKAnnotation {
     let reviewCount: NSNumber?
     let lat: Double?
     let lon: Double?
+    let dealDescription: String?
     
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
@@ -56,6 +57,14 @@ class Business: NSObject, MKAnnotation {
         self.lat = lat
         self.lon = lon
         self.address = address
+
+        if let deals = dictionary["deals"] as? NSArray {
+            self.dealDescription = deals.map({ (deal) -> String in
+                return (deal as? NSDictionary)!["title"] as! String
+            }).joinWithSeparator(",")
+        } else {
+            self.dealDescription = nil
+        }
         
         let categoriesArray = dictionary["categories"] as? [[String]]
         if categoriesArray != nil {
