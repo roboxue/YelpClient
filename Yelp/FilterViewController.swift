@@ -113,6 +113,7 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = FilterTableViewCell(style: .Value1, reuseIdentifier: nil)
+        cell.textLabel?.font = YPTitleFontBold
         switch indexPath.section {
         case DealSection:
             cell.textLabel?.text = "Offering a Deal"
@@ -145,6 +146,7 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
             }
         case CategorySection:
             if categoryDataSource.count == indexPath.row {
+                cell.textLabel?.textColor = YPSecondardColor
                 cell.textLabel?.text = "See All"
             } else {
                 let option = categoryDataSource[indexPath.row]

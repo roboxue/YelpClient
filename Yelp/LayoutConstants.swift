@@ -9,6 +9,7 @@
 import UIKit
 
 let YPBackgroundColor = UIColor.whiteColor()
+let YPSecondardColor = UIColor.grayColor()
 let YPRed = UIColor(red: 196.0/255.0, green: 18.0/255.0, blue: 0.0, alpha: 1)
 
 let YPSpanSize = 5

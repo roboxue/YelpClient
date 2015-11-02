@@ -78,7 +78,7 @@ class BusinessTableViewCell: UITableViewCell {
             make.right.lessThanOrEqualTo(self).offset(-YPSpanSize)
         }
         businessCategoryLabel.snp_makeConstraints { (make) -> Void in
-            make.top.equalTo(businessAddressLabel.snp_bottom).offset(YPSpanSize)
+            make.top.equalTo(businessAddressLabel.snp_bottom)
             make.left.equalTo(businessNameLabel)
             make.right.lessThanOrEqualTo(self).offset(-YPSpanSize)
             make.bottom.lessThanOrEqualTo(self).offset(-YPSpanSize)
@@ -116,6 +116,7 @@ extension BusinessTableViewCell {
     var businessNameLabel: UILabel {
         if _businessNameLabel == nil {
             let v = UILabel()
+            v.font = YPTitleFontBold
             _businessNameLabel = v
         }
         return _businessNameLabel
@@ -124,6 +125,8 @@ extension BusinessTableViewCell {
     var businessReviewLabel: UILabel {
         if _businessReviewLabel == nil {
             let v = UILabel()
+            v.font = YPContentFont
+            v.textColor = YPSecondardColor
             _businessReviewLabel = v
         }
         return _businessReviewLabel
@@ -134,6 +137,7 @@ extension BusinessTableViewCell {
             let v = UILabel()
             v.numberOfLines = 0
             v.lineBreakMode = .ByWordWrapping
+            v.font = YPContentFontBold
             _businessAddressLabel = v
         }
         return _businessAddressLabel
@@ -144,6 +148,8 @@ extension BusinessTableViewCell {
             let v = UILabel()
             v.numberOfLines = 0
             v.lineBreakMode = .ByWordWrapping
+            v.font = YPContentFont
+            v.textColor = YPSecondardColor
             _businessCategoryLabel = v
         }
         return _businessCategoryLabel
@@ -152,6 +158,8 @@ extension BusinessTableViewCell {
     var businessDistanceLabel: UILabel {
         if _businessDistanceLabel == nil {
             let v = UILabel()
+            v.font = YPTitleFont
+            v.textColor = YPSecondardColor
             _businessDistanceLabel = v
         }
         return _businessDistanceLabel
