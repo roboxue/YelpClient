@@ -30,9 +30,6 @@ class FilterViewController: UIViewController {
     private let sortByOptions: [YelpSortMode] = [.BestMatched, .Distance, .HighestRated]
     private var _sortByToggled = false
 
-    private let categoryDefaultOptions = YelpCategories.filter { (category) -> Bool in
-        return category.display
-    }
     private var _categoryToggled = false
 
     override func viewDidLoad() {
@@ -104,11 +101,11 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
         case DealSection:
             return 1
         case DistanceSection:
-            return _distanceToggled ? distanceOptions.count : 1
+            return _distanceToggled ? distanceOptions.count: 1
         case SortBySection:
-            return _sortByToggled ? sortByOptions.count : 1
+            return _sortByToggled ? sortByOptions.count: 1
         case CategorySection:
-            return categoryDataSource.count + 1
+            return categoryToggled ? categoryDataSource.count: (categoryDataSource.count + 1)
         default:
             return 0
         }
@@ -148,7 +145,7 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
             }
         case CategorySection:
             if categoryDataSource.count == indexPath.row {
-                cell.textLabel?.text = categoryToggled ? "Hide": "See All"
+                cell.textLabel?.text = "See All"
             } else {
                 let option = categoryDataSource[indexPath.row]
                 let optionSwitch = UISwitch()
@@ -200,7 +197,7 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
             }
         case CategorySection:
             if indexPath.row == categoryDataSource.count {
-                categoryToggled = !categoryToggled
+                categoryToggled = true
             }
         default:
             break
@@ -288,6 +285,10 @@ extension FilterViewController {
     }
 
     var categoryDataSource: [YelpCategory] {
-        return categoryToggled ? YelpCategories : categoryDefaultOptions
+        return categoryToggled ? YelpCategories : (YelpCategories.filter { (category) -> Bool in
+            return category.display
+        } + _selectedCategories.filter({ (category) -> Bool in
+            return category.display == false
+        }))
     }
 }
