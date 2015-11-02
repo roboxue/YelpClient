@@ -8,6 +8,7 @@
 
 import Foundation
 
+var YPSearchTerm = ""
 var YPDealOnly = false
 var YPSelectedCategory = [YelpCategory]()
 var YPSelectedFilterDistance = YelpFilterDistance.Auto

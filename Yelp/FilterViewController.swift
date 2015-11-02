@@ -21,8 +21,8 @@ class FilterViewController: UIViewController {
 
     private var _dealToggled = YPDealOnly
     private var _selectedFilterDistance = YPSelectedFilterDistance
-    private let _selectedSortByOption = YPSelectedSortMode
-    private let _selectedCategories = YPSelectedCategory
+    private var _selectedSortByOption = YPSelectedSortMode
+    private var _selectedCategories = YPSelectedCategory
 
     private let distanceOptions: [YelpFilterDistance] = [.Auto, .Level1, .Level2, .Level3, .Level4]
     private var _distanceToggled = false
@@ -30,6 +30,9 @@ class FilterViewController: UIViewController {
     private let sortByOptions: [YelpSortMode] = [.BestMatched, .Distance, .HighestRated]
     private var _sortByToggled = false
 
+    private let categoryDefaultOptions = YelpCategories.filter { (category) -> Bool in
+        return category.display
+    }
     private var _categoryToggled = false
 
     override func viewDidLoad() {
@@ -70,6 +73,24 @@ class FilterViewController: UIViewController {
     func didToggledDeal(sender: UISwitch) {
         dealToggled = sender.on
     }
+
+    func didSelectedCategory(sender: UISwitch) {
+        let row = sender.tag
+        let option = categoryDataSource[row]
+        if sender.on {
+            if !_selectedCategories.contains({ (category) -> Bool in
+                return category.code == option.code
+            }) {
+                _selectedCategories.append(option)
+            }
+        } else {
+            if let index = _selectedCategories.indexOf({ (category) -> Bool in
+                return category.code == option.code
+            }) {
+                _selectedCategories.removeAtIndex(index)
+            }
+        }
+    }
 }
 
 extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
@@ -87,14 +108,14 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
         case SortBySection:
             return _sortByToggled ? sortByOptions.count : 1
         case CategorySection:
-            return YelpCategories.count
+            return categoryDataSource.count + 1
         default:
             return 0
         }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = FilterTableViewCell(style: .Default, reuseIdentifier: nil)
+        let cell = FilterTableViewCell(style: .Value1, reuseIdentifier: nil)
         switch indexPath.section {
         case DealSection:
             cell.textLabel?.text = "Offering a Deal"
@@ -102,12 +123,43 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
         case DistanceSection:
             let option = distanceToggled ? distanceOptions[indexPath.row] : _selectedFilterDistance
             cell.textLabel?.text = option.rawValue
+            if distanceToggled {
+                if option == _selectedFilterDistance {
+                    cell.accessoryType = .Checkmark
+                }
+            } else {
+                let downArrow = UILabel()
+                downArrow.text = "∇"
+                downArrow.sizeToFit()
+                cell.accessoryView = downArrow
+            }
         case SortBySection:
             let option = sortByToggled ? sortByOptions[indexPath.row]: _selectedSortByOption
             cell.textLabel?.text = option.toString()
+            if sortByToggled {
+                if option == _selectedSortByOption {
+                    cell.accessoryType = .Checkmark
+                }
+            } else {
+                let downArrow = UILabel()
+                downArrow.text = "∇"
+                downArrow.sizeToFit()
+                cell.accessoryView = downArrow
+            }
         case CategorySection:
-            let option = YelpCategories[indexPath.row]
-            cell.textLabel?.text = option.name
+            if categoryDataSource.count == indexPath.row {
+                cell.textLabel?.text = categoryToggled ? "Hide": "See All"
+            } else {
+                let option = categoryDataSource[indexPath.row]
+                let optionSwitch = UISwitch()
+                optionSwitch.on = _selectedCategories.contains({ (category) -> Bool in
+                    return category.code == option.code
+                })
+                optionSwitch.tag = indexPath.row
+                optionSwitch.addTarget(self, action: "didSelectedCategory:", forControlEvents: .ValueChanged)
+                cell.accessoryView = optionSwitch
+                cell.textLabel?.text = option.name
+            }
         default:
             break
         }
@@ -124,6 +176,34 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
             return "Category"
         default:
             return nil
+        }
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        switch indexPath.section {
+        case DealSection:
+            dealToggled = !dealToggled
+        case DistanceSection:
+            if distanceToggled {
+                _selectedFilterDistance = distanceOptions[indexPath.row]
+                distanceToggled = false
+            } else {
+                distanceToggled = true
+            }
+        case SortBySection:
+            if sortByToggled {
+                _selectedSortByOption = sortByOptions[indexPath.row]
+                sortByToggled = false
+            } else {
+                sortByToggled = true
+            }
+        case CategorySection:
+            if indexPath.row == categoryDataSource.count {
+                categoryToggled = !categoryToggled
+            }
+        default:
+            break
         }
     }
 }
@@ -163,6 +243,7 @@ extension FilterViewController {
         }
         set {
             _distanceToggled = newValue
+            self.tableView.reloadSections(NSIndexSet(index: DistanceSection), withRowAnimation: .Automatic)
         }
     }
 
@@ -172,6 +253,7 @@ extension FilterViewController {
         }
         set {
             _sortByToggled = newValue
+            self.tableView.reloadSections(NSIndexSet(index: SortBySection), withRowAnimation: .Automatic)
         }
     }
 
@@ -181,6 +263,7 @@ extension FilterViewController {
         }
         set {
             _categoryToggled = newValue
+            self.tableView.reloadSections(NSIndexSet(index: CategorySection), withRowAnimation: .Automatic)
         }
     }
 
@@ -202,5 +285,9 @@ extension FilterViewController {
         }
         _dealSwitch.on = dealToggled
         return _dealSwitch
+    }
+
+    var categoryDataSource: [YelpCategory] {
+        return categoryToggled ? YelpCategories : categoryDefaultOptions
     }
 }

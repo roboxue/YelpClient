@@ -44,7 +44,8 @@ class BusinessesViewController: UIViewController {
     }
 
     func initData() {
-        Business.searchWithTerm("", sort: YPSelectedSortMode, categories: YPSelectedCategory, deals: YPDealOnly, radius: YPSelectedFilterDistance) { (businesses: [Business]!, error: NSError!) -> Void in
+        debugPrint(YPSearchTerm)
+        Business.searchWithTerm(YPSearchTerm, sort: YPSelectedSortMode, categories: YPSelectedCategory, deals: YPDealOnly, radius: YPSelectedFilterDistance) { (businesses: [Business]!, error: NSError!) -> Void in
             self.saveData(businesses)
         }
     }
@@ -92,7 +93,8 @@ extension BusinessesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         let term = searchBar.text ?? ""
-        Business.searchWithTerm(term, sort: .BestMatched) { (businesses, error) -> Void in
+        YPSearchTerm = term
+        Business.searchWithTerm(YPSearchTerm, sort: .BestMatched) { (businesses, error) -> Void in
             self.saveData(businesses)
         }
     }
@@ -123,6 +125,7 @@ extension BusinessesViewController {
             v.placeholder = "Restaurants"
             v.showsCancelButton = true
             v.delegate = self
+            v.text = YPSearchTerm
             _searchBar = v
         }
         return _searchBar

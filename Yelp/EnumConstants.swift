@@ -29,10 +29,12 @@ enum YelpFilterDistance: String {
 class YelpCategory {
     let name: String
     let code: String
+    let display: Bool
 
-    init(name: String, code: String) {
+    init(name: String, code: String, display: Bool = false) {
         self.name = name
         self.code = code
+        self.display = display
     }
 }
 
@@ -43,7 +45,7 @@ let YelpCategories = [
     YelpCategory(name: "American, Traditional", code: "tradamerican"),
     YelpCategory(name: "Arabian", code: "arabian"),
     YelpCategory(name: "Argentine", code: "argentine"),
-    YelpCategory(name: "Armenian", code: "armenian"),
+    YelpCategory(name: "Armenian", code: "armenian", display: true),
     YelpCategory(name: "Asian Fusion", code: "asianfusion"),
     YelpCategory(name: "Asturian", code: "asturian"),
     YelpCategory(name: "Australian", code: "australian"),
@@ -80,7 +82,7 @@ let YelpCategories = [
     YelpCategory(name: "Chicken Shop", code: "chickenshop"),
     YelpCategory(name: "Chicken Wings", code: "chicken_wings"),
     YelpCategory(name: "Chilean", code: "chilean"),
-    YelpCategory(name: "Chinese", code: "chinese"),
+    YelpCategory(name: "Chinese", code: "chinese", display: true),
     YelpCategory(name: "Comfort Food", code: "comfortfood"),
     YelpCategory(name: "Corsican", code: "corsican"),
     YelpCategory(name: "Creperies", code: "creperies"),
@@ -95,7 +97,7 @@ let YelpCategories = [
     YelpCategory(name: "Dumplings", code: "dumplings"),
     YelpCategory(name: "Eastern European", code: "eastern_european"),
     YelpCategory(name: "Ethiopian", code: "ethiopian"),
-    YelpCategory(name: "Fast Food", code: "hotdogs"),
+    YelpCategory(name: "Fast Food", code: "hotdogs", display: true),
     YelpCategory(name: "Filipino", code: "filipino"),
     YelpCategory(name: "Fish & Chips", code: "fishnchips"),
     YelpCategory(name: "Fondue", code: "fondue"),
@@ -108,7 +110,7 @@ let YelpCategories = [
     YelpCategory(name: "Georgian", code: "georgian"),
     YelpCategory(name: "German", code: "german"),
     YelpCategory(name: "Giblets", code: "giblets"),
-    YelpCategory(name: "Gluten-Free", code: "gluten_free"),
+    YelpCategory(name: "Gluten-Free", code: "gluten_free", display: true),
     YelpCategory(name: "Greek", code: "greek"),
     YelpCategory(name: "Halal", code: "halal"),
     YelpCategory(name: "Hawaiian", code: "hawaiian"),
@@ -126,7 +128,7 @@ let YelpCategories = [
     YelpCategory(name: "Island Pub", code: "island_pub"),
     YelpCategory(name: "Israeli", code: "israeli"),
     YelpCategory(name: "Italian", code: "italian"),
-    YelpCategory(name: "Japanese", code: "japanese"),
+    YelpCategory(name: "Japanese", code: "japanese", display: true),
     YelpCategory(name: "Jewish", code: "jewish"),
     YelpCategory(name: "Kebab", code: "kebab"),
     YelpCategory(name: "Korean", code: "korean"),
@@ -158,7 +160,7 @@ let YelpCategories = [
     YelpCategory(name: "Persian/Iranian", code: "persian"),
     YelpCategory(name: "Peruvian", code: "peruvian"),
     YelpCategory(name: "Pita", code: "pita"),
-    YelpCategory(name: "Pizza", code: "pizza"),
+    YelpCategory(name: "Pizza", code: "pizza", display: true),
     YelpCategory(name: "Polish", code: "polish"),
     YelpCategory(name: "Portuguese", code: "portuguese"),
     YelpCategory(name: "Potatoes", code: "potatoes"),
@@ -200,7 +202,7 @@ let YelpCategories = [
     YelpCategory(name: "Ukrainian", code: "ukrainian"),
     YelpCategory(name: "Uzbek", code: "uzbek"),
     YelpCategory(name: "Vegan", code: "vegan"),
-    YelpCategory(name: "Vegetarian", code: "vegetarian"),
+    YelpCategory(name: "Vegetarian", code: "vegetarian", display: true),
     YelpCategory(name: "Venison", code: "venison"),
     YelpCategory(name: "Vietnamese", code: "vietnamese"),
     YelpCategory(name: "Wok", code: "wok"),
