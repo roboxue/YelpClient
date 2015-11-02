@@ -15,5 +15,13 @@ let YPSpanSize = 5
 
 let YPPlaceholderImage = UIImage(named: "Placeholder")!
 
-let YPDefaultLimit = 10
+let YPDefaultLimit = 20
+
+let SimulateLat = 37.785771
+let SimulateLon = -122.406165
+
+let YPContentFont = UIFont(name: "Avenir", size: 14)
+let YPContentFontBold = UIFont(name: "Avenir-Heavy", size: 14)
+let YPTitleFont = UIFont(name: "Avenir", size: 17)
+let YPTitleFontBold = UIFont(name: "Avenir-Heavy", size: 17)
 

@@ -12,6 +12,7 @@ class BusinessesViewController: UIViewController {
     private var _tableView: UITableView!
     private var _searchBar: UISearchBar!
     private var _filterButton: UIBarButtonItem!
+    private var _mapviewButton: UIBarButtonItem!
 
     var businesses = [Business]()
 
@@ -32,6 +33,7 @@ class BusinessesViewController: UIViewController {
         view.addSubview(tableView)
         navigationItem.titleView = searchBar
         navigationItem.leftBarButtonItem = filterButton
+        navigationItem.rightBarButtonItem = mapviewButton
     }
 
     func addLayouts() {
@@ -58,6 +60,14 @@ class BusinessesViewController: UIViewController {
     func didPressedFilterButton() {
         let filterPage = YPNavigationViewController(rootViewController: FilterViewController())
         presentViewController(filterPage, animated: true, completion: nil)
+    }
+
+    func didPressedMapButton() {
+        let mapPage = MapViewController()
+        mapPage.businesses = businesses
+        let mapWraped = YPNavigationViewController(rootViewController: mapPage)
+        mapWraped.modalTransitionStyle = .FlipHorizontal
+        presentViewController(mapWraped, animated: true, completion: nil)
     }
 }
 
@@ -98,11 +108,6 @@ extension BusinessesViewController: UISearchBarDelegate {
             self.saveData(businesses)
         }
     }
-
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchBar.text = ""
-        searchBar.resignFirstResponder()
-    }
 }
 
 extension BusinessesViewController {
@@ -123,7 +128,6 @@ extension BusinessesViewController {
         if _searchBar == nil {
             let v = UISearchBar()
             v.placeholder = "Restaurants"
-            v.showsCancelButton = true
             v.delegate = self
             v.text = YPSearchTerm
             _searchBar = v
@@ -137,5 +141,13 @@ extension BusinessesViewController {
             _filterButton = v
         }
         return _filterButton
+    }
+
+    var mapviewButton: UIBarButtonItem {
+        if _mapviewButton == nil {
+            let v = UIBarButtonItem(title: "Map", style: .Plain, target: self, action: "didPressedMapButton")
+            _mapviewButton = v
+        }
+        return _mapviewButton
     }
 }

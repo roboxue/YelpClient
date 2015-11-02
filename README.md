@@ -2,7 +2,7 @@
 
 **Yelp Client** is a Yelp search app using the [Yelp API](http://www.yelp.com/developers/documentation/v2/search_api).
 
-Time spent: **6** hours spent in total
+Time spent: **7** hours spent in total
 
 ## User Stories
 
@@ -23,7 +23,7 @@ The following **optional** features are implemented:
 
 - [x] Search results page
 - [ ] Infinite scroll for restaurant results.
-- [ ] Implement map view of restaurant results.
+- [x] Implement map view of restaurant results.
 - [x] Filter page
 - [ ] Implement a custom switch instead of the default UISwitch.
 - [x] Distance filter should expand as in the real Yelp app
