@@ -15,7 +15,10 @@
 		22AAAA991AEA0A9700A544AF /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AAAA981AEA0A9700A544AF /* Business.swift */; };
 		22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */; };
 		3473B06C7F3C08C0C294D4A9 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89CC6D70827C5BC2F46FA0E /* Pods.framework */; };
+		8B5CD8691BE704B20069CD36 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5CD8681BE704B20069CD36 /* FilterTableViewCell.swift */; };
+		8B5CD86B1BE70BEE0069CD36 /* SharedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5CD86A1BE70BEE0069CD36 /* SharedFilter.swift */; };
 		8B625AA21BE6A357007104BE /* LayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B625AA11BE6A357007104BE /* LayoutConstants.swift */; };
+		8B78F6A41BE6EEBC007D4005 /* EnumConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B78F6A31BE6EEBC007D4005 /* EnumConstants.swift */; };
 		8BC215F81BE6B5D700816172 /* BusinessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC215F71BE6B5D700816172 /* BusinessTableViewCell.swift */; };
 		8BC215FC1BE6D26000816172 /* YPNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC215FB1BE6D26000816172 /* YPNavigationViewController.swift */; };
 		8BC215FE1BE6D48F00816172 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC215FD1BE6D48F00816172 /* FilterViewController.swift */; };
@@ -44,7 +47,10 @@
 		222D8A7E19CCFAEF00D2DB53 /* Yelp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Yelp-Bridging-Header.h"; sourceTree = "<group>"; };
 		22AAAA981AEA0A9700A544AF /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
 		22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessesViewController.swift; sourceTree = "<group>"; };
+		8B5CD8681BE704B20069CD36 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		8B5CD86A1BE70BEE0069CD36 /* SharedFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFilter.swift; sourceTree = "<group>"; };
 		8B625AA11BE6A357007104BE /* LayoutConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstants.swift; sourceTree = "<group>"; };
+		8B78F6A31BE6EEBC007D4005 /* EnumConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumConstants.swift; sourceTree = "<group>"; };
 		8BC215F71BE6B5D700816172 /* BusinessTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessTableViewCell.swift; sourceTree = "<group>"; };
 		8BC215FB1BE6D26000816172 /* YPNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YPNavigationViewController.swift; sourceTree = "<group>"; };
 		8BC215FD1BE6D48F00816172 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +162,8 @@
 				8BC215F71BE6B5D700816172 /* BusinessTableViewCell.swift */,
 				8BC215FB1BE6D26000816172 /* YPNavigationViewController.swift */,
 				8BC215FD1BE6D48F00816172 /* FilterViewController.swift */,
+				8B5CD8681BE704B20069CD36 /* FilterTableViewCell.swift */,
+				8B5CD86A1BE70BEE0069CD36 /* SharedFilter.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -172,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				8B625AA11BE6A357007104BE /* LayoutConstants.swift */,
+				8B78F6A31BE6EEBC007D4005 /* EnumConstants.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -337,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B78F6A41BE6EEBC007D4005 /* EnumConstants.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,
 				22AAAA991AEA0A9700A544AF /* Business.swift in Sources */,
 				8BC215FE1BE6D48F00816172 /* FilterViewController.swift in Sources */,
@@ -345,6 +355,8 @@
 				8B625AA21BE6A357007104BE /* LayoutConstants.swift in Sources */,
 				8BC215F81BE6B5D700816172 /* BusinessTableViewCell.swift in Sources */,
 				8BC215FC1BE6D26000816172 /* YPNavigationViewController.swift in Sources */,
+				8B5CD86B1BE70BEE0069CD36 /* SharedFilter.swift in Sources */,
+				8B5CD8691BE704B20069CD36 /* FilterTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,8 +20,12 @@ class BusinessesViewController: UIViewController {
         super.viewDidLoad()
         addSubviews()
         addLayouts()
-        initData()
         automaticallyAdjustsScrollViewInsets = false
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        initData()
     }
 
     func addSubviews() {
@@ -40,7 +44,7 @@ class BusinessesViewController: UIViewController {
     }
 
     func initData() {
-        Business.searchWithTerm("Restaurants", sort: .Distance, categories: nil, deals: nil) { (businesses: [Business]!, error: NSError!) -> Void in
+        Business.searchWithTerm("", sort: YPSelectedSortMode, categories: YPSelectedCategory, deals: YPDealOnly, radius: YPSelectedFilterDistance) { (businesses: [Business]!, error: NSError!) -> Void in
             self.saveData(businesses)
         }
     }
@@ -88,7 +92,7 @@ extension BusinessesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         let term = searchBar.text ?? ""
-        Business.searchWithTerm(term, sort: .BestMatched, categories: nil, deals: nil) { (businesses, error) -> Void in
+        Business.searchWithTerm(term, sort: .BestMatched) { (businesses, error) -> Void in
             self.saveData(businesses)
         }
     }

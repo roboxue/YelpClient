@@ -84,7 +84,9 @@ class Business: NSObject {
         return businesses
     }
     
-    class func searchWithTerm(term: String, sort: YelpSortMode? = .Distance, categories: [String]? = nil, deals: Bool? = nil, completion: ([Business]!, NSError!) -> Void) -> Void {
-        YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: categories, deals: deals, completion: completion)
+    class func searchWithTerm(term: String, sort: YelpSortMode? = .Distance, categories: [YelpCategory] = [YelpCategory](), radius: YelpFilterDistance = .Auto, deals: Bool? = nil, completion: ([Business]!, NSError!) -> Void) -> Void {
+        YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: categories.map({ (category) -> String in
+            return category.code
+        }), deals: deals, radius: radius.meters, completion: completion)
     }
 }

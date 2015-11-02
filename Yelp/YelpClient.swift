@@ -17,6 +17,16 @@ let yelpTokenSecret = "mqtKIxMIR4iBtBPZCmCLEb-Dz3Y"
 
 enum YelpSortMode: Int {
     case BestMatched = 0, Distance, HighestRated
+    func toString() -> String {
+        switch self {
+        case .BestMatched:
+            return "Best Match"
+        case .Distance:
+            return "Distance"
+        case .HighestRated:
+            return "Highest Rated"
+        }
+    }
 }
 
 class YelpClient: BDBOAuth1RequestOperationManager {
@@ -49,7 +59,7 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         self.requestSerializer.saveAccessToken(token)
     }
     
-    func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, limit: Int? = YPDefaultLimit, completion: ([Business]!, NSError!) -> Void) -> AFHTTPRequestOperation {
+    func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, radius: Int? = nil, limit: Int? = YPDefaultLimit, completion: ([Business]!, NSError!) -> Void) -> AFHTTPRequestOperation {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
 
         // Default the location to San Francisco
@@ -65,6 +75,10 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         
         if let deals = deals {
             parameters["deals_filter"] = deals
+        }
+
+        if let radius = radius where radius > 0 && radius <= 40000 {
+            parameters["radius_filter"] = radius
         }
 
         if let limit = limit {
