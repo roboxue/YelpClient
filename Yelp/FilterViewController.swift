@@ -149,6 +149,7 @@ extension FilterViewController: UITableViewDataSource, UITableViewDelegate {
             } else {
                 let option = categoryDataSource[indexPath.row]
                 let optionSwitch = UISwitch()
+                optionSwitch.onTintColor = YPRed
                 optionSwitch.on = _selectedCategories.contains({ (category) -> Bool in
                     return category.code == option.code
                 })
@@ -277,6 +278,7 @@ extension FilterViewController {
     var dealSwitch: UISwitch {
         if _dealSwitch == nil {
             let v = UISwitch()
+            v.onTintColor = YPRed
             v.addTarget(self, action: "didToggledDeal:", forControlEvents: .ValueChanged)
             _dealSwitch = v
         }
